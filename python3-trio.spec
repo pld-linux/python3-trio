@@ -6,13 +6,13 @@
 Summary:	A friendly Python library for async concurrency and I/O
 Summary(pl.UTF-8):	Przyjazna biblioteka do współbieżności asynchronicznej i we/wy
 Name:		python3-trio
-Version:	0.20.0
-Release:	3
+Version:	0.21.0
+Release:	1
 License:	MIT or Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/trio/
 Source0:	https://files.pythonhosted.org/packages/source/t/trio/trio-%{version}.tar.gz
-# Source0-md5:	1310f7f08b8b8926323ed7330fedc22c
+# Source0-md5:	86b0b3732d70e084a74d1c442ce910d3
 URL:		https://pypi.org/project/trio/
 BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools
