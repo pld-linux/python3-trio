@@ -6,16 +6,17 @@
 Summary:	A friendly Python library for async concurrency and I/O
 Summary(pl.UTF-8):	Przyjazna biblioteka do współbieżności asynchronicznej i we/wy
 Name:		python3-trio
-Version:	0.21.0
-Release:	3
+Version:	0.29.0
+Release:	1
 License:	MIT or Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/trio/
 Source0:	https://files.pythonhosted.org/packages/source/t/trio/trio-%{version}.tar.gz
-# Source0-md5:	86b0b3732d70e084a74d1c442ce910d3
+# Source0-md5:	409b86355e6f43fd62cbe5e39303ff6f
 URL:		https://pypi.org/project/trio/
 BuildRequires:	python3-modules >= 1:3.7
-BuildRequires:	python3-setuptools
+BuildRequires:	python3-build
+BuildRequires:	python3-installer
 %if %{with tests}
 BuildRequires:	python3-astor
 BuildRequires:	python3-async_generator >= 1.9
@@ -68,7 +69,7 @@ Dokumentacja API modułu Pythona trio.
 %setup -q -n trio-%{version}
 
 %build
-%py3_build
+%py3_build_pyproject
 
 %if %{with tests}
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
@@ -84,9 +85,7 @@ PYTHONPATH=$(pwd) \
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%py3_install
-
-%{__rm} -r $RPM_BUILD_ROOT%{py3_sitescriptdir}/trio/{_core/tests,tests}
+%py3_install_pyproject
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -95,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE LICENSE.MIT README.rst
 %{py3_sitescriptdir}/trio
-%{py3_sitescriptdir}/trio-%{version}-py*.egg-info
+%{py3_sitescriptdir}/trio-%{version}.dist-info
 
 %if %{with doc}
 %files apidocs
