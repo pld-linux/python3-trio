@@ -1,0 +1,31 @@
+Deal with intersphinx references not generated due to network isolation
+--- trio-0.30.0/docs/source/conf.py.orig	2025-04-21 02:47:33.000000000 +0200
++++ trio-0.30.0/docs/source/conf.py	2025-07-05 07:14:42.522891315 +0200
+@@ -280,6 +280,8 @@ def add_intersphinx(app: Sphinx) -> None
+         assert isinstance(inventory, dict)
+         inventory = cast("Inventory", inventory)
+ 
++        if f"py:{reftype}" not in inventory:
++            inventory[f"py:{reftype}"] = {}
+         inventory[f"py:{reftype}"][f"{target}"] = _InventoryItem(
+             project_name="Python",
+             project_version=version,
+--- trio-0.30.0/docs/source/typevars.py.orig	2025-07-05 13:21:58.390179443 +0200
++++ trio-0.30.0/docs/source/typevars.py	2025-07-05 13:25:34.135677315 +0200
+@@ -10,6 +10,7 @@ import sys
+ from pathlib import Path
+ from typing import TYPE_CHECKING
+ 
++import docutils
+ import trio
+ from sphinx.errors import NoUri
+ 
+@@ -93,6 +94,8 @@ def lookup_reference(
+         contnode,
+         allowed_exceptions=(NoUri,),
+     )
++    if not isinstance(new_node, docutils.nodes.Element) or "reftitle" not in new_node:
++        return new_node
+     reftitle = new_node["reftitle"]
+     # Is normally "(in Python 3.XX)", make it say typevar/paramspec/etc
+     paren = "(" if reftitle.startswith("(") else ""
