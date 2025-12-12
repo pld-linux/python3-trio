@@ -6,18 +6,18 @@
 Summary:	A friendly Python library for async concurrency and I/O
 Summary(pl.UTF-8):	Przyjazna biblioteka do współbieżności asynchronicznej i we/wy
 Name:		python3-trio
-Version:	0.30.0
+Version:	0.32.0
 Release:	1
 License:	MIT or Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/trio/
 Source0:	https://files.pythonhosted.org/packages/source/t/trio/trio-%{version}.tar.gz
-# Source0-md5:	533d80e111a7edb6fab6fd2f81112dfb
+# Source0-md5:	8bc9dbdc265c291c93006f5e0f1d3918
 Patch0:		trio-intersphinx.patch
 URL:		https://pypi.org/project/trio/
 BuildRequires:	python3-build
 BuildRequires:	python3-installer
-BuildRequires:	python3-modules >= 1:3.9
+BuildRequires:	python3-modules >= 1:3.10
 BuildRequires:	python3-setuptools >= 1:77
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -40,8 +40,8 @@ BuildRequires:	python3-async_generator >= 1.9
 BuildRequires:	python3-jedi
 BuildRequires:	python3-pylint
 #BuildRequires:	python3-pyright
-#BuildRequires:	python3-ruff
-BuildRequires:	python3-pytest >= 5.0
+#BuildRequires:	python3-ruff >= 0.8.0
+BuildRequires:	python3-pytest >= 8.4
 BuildRequires:	python3-trustme
 %endif
 %if %{with doc}
@@ -51,7 +51,7 @@ BuildRequires:	python3-sphinxcontrib-jquery
 BuildRequires:	python3-sphinxcontrib-trio
 BuildRequires:	sphinx-pdg-3 >= 6.0
 %endif
-Requires:	python3-modules >= 1:3.9
+Requires:	python3-modules >= 1:3.10
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
