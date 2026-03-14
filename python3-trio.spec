@@ -6,13 +6,13 @@
 Summary:	A friendly Python library for async concurrency and I/O
 Summary(pl.UTF-8):	Przyjazna biblioteka do współbieżności asynchronicznej i we/wy
 Name:		python3-trio
-Version:	0.32.0
+Version:	0.33.0
 Release:	1
 License:	MIT or Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/trio/
 Source0:	https://files.pythonhosted.org/packages/source/t/trio/trio-%{version}.tar.gz
-# Source0-md5:	8bc9dbdc265c291c93006f5e0f1d3918
+# Source0-md5:	e778db1205fa2ea00dac9340471b8f1d
 Patch0:		trio-intersphinx.patch
 URL:		https://pypi.org/project/trio/
 BuildRequires:	python3-build
@@ -23,7 +23,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 %if %{with tests} || %{with doc}
 BuildRequires:	python3-attrs >= 23.2.0
-%if "%{py3_ver}" == "3.9"
+%if "%{py3_ver}" == "3.10"
 BuildRequires:	python3-exceptiongroup >= 1.2.1
 %endif
 BuildRequires:	python3-idna
@@ -37,6 +37,7 @@ BuildRequires:	python3-astor
 # TODO (not to disable test_gen)
 #BuildRequires:	python3-black
 BuildRequires:	python3-async_generator >= 1.9
+BuildRequires:	python3-cryptography >= 41.0.0
 BuildRequires:	python3-jedi
 BuildRequires:	python3-pylint
 #BuildRequires:	python3-pyright
@@ -88,11 +89,9 @@ Dokumentacja API modułu Pythona trio.
 
 %if %{with tests}
 # test_gen_exports requires black and ruff
-# test_dtls fails almost all the cases
-# the rest uses (localhost?) networking
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTHONPATH=$(pwd)/src \
-%{__python3} -m pytest src/trio/_core/_tests src/trio/_tests tests -k 'not test_gen_exports and not test_dtls and not test_highlevel_open_tcp_stream and not test_highlevel_socket and not test_highlevel_open_tcp_listeners and not test_highlevel_ssl_helpers and not test_socket and not test_ssl and not test_open_stream_to_socket_listener and not test_run_in_worker_thread_limiter'
+%{__python3} -m pytest src/trio/_core/_tests src/trio/_tests tests -k 'not test_gen_exports'
 %endif
 %if %{with doc}
 LC_ALL=C.UTF-8 \
