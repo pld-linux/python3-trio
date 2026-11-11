@@ -1,7 +1,7 @@
 Deal with intersphinx references not generated due to network isolation
---- trio-0.33.0/docs/source/conf.py.orig	2026-02-14 19:39:58.000000000 +0100
-+++ trio-0.33.0/docs/source/conf.py	2026-03-13 22:45:56.290218450 +0100
-@@ -282,6 +282,8 @@ def add_intersphinx(app: Sphinx) -> None
+--- trio-0.35.0.orig/docs/source/conf.py
++++ trio-0.35.0/docs/source/conf.py
+@@ -274,6 +274,8 @@
          assert isinstance(inventory, dict)
          inventory = cast("Inventory", inventory)
  
@@ -10,9 +10,9 @@ Deal with intersphinx references not generated due to network isolation
          if sys.version_info >= (3, 11):
              inventory[f"py:{reftype}"][f"{target}"] = _InventoryItem(
                  project_name="Python",
---- trio-0.30.0/docs/source/typevars.py.orig	2025-07-05 13:21:58.390179443 +0200
-+++ trio-0.30.0/docs/source/typevars.py	2025-07-05 13:25:34.135677315 +0200
-@@ -10,6 +10,7 @@ import sys
+--- trio-0.35.0.orig/docs/source/typevars.py
++++ trio-0.35.0/docs/source/typevars.py
+@@ -9,6 +9,7 @@
  from pathlib import Path
  from typing import TYPE_CHECKING
  
@@ -20,7 +20,7 @@ Deal with intersphinx references not generated due to network isolation
  import trio
  from sphinx.errors import NoUri
  
-@@ -93,6 +94,8 @@ def lookup_reference(
+@@ -92,6 +93,8 @@
          contnode,
          allowed_exceptions=(NoUri,),
      )
